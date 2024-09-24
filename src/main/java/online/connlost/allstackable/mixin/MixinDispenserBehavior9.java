@@ -2,26 +2,32 @@ package online.connlost.allstackable.mixin;
 
 import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPointer;
 import online.connlost.allstackable.util.IDispenserBlockEntity;
 import online.connlost.allstackable.util.ItemsHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$9")
 public class MixinDispenserBehavior9 {
 
-    @Redirect(
-            method = "dispenseSilently",
-            at = @At(
-                    target = "Lnet/minecraft/block/entity/DispenserBlockEntity;addToFirstFreeSlot(Lnet/minecraft/item/ItemStack;)I",
-                    value = "INVOKE"
-            ))
-    public int tryStack(DispenserBlockEntity instance, ItemStack stack) {
-        int ret = instance.addToFirstFreeSlot(stack);
-        if(ItemsHelper.isModified(stack) && ret < 0) {
-            ret = ((IDispenserBlockEntity) instance).tryInsertAndStackItem(stack) ? 1 : -1;
+    @Inject(method = "dispenseSilently", at = @At("HEAD"), cancellable = true)
+    public void tryStack(BlockPointer pointer, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
+        // Add the item to the first free slot and get the remaining stack
+        ItemStack remainingStack = pointer.blockEntity().addToFirstFreeSlot(stack);
+
+        // Check if the item is modified and if there's any remaining item stack after the operation
+        if (ItemsHelper.isModified(stack) && !remainingStack.isEmpty()) {
+            // Attempt custom logic to stack the remaining item
+            boolean success = ((IDispenserBlockEntity) pointer.blockEntity()).tryInsertAndStackItem(remainingStack);
+
+            // If custom stacking succeeds, cancel further execution and return an empty stack
+            if (success) {
+                cir.setReturnValue(ItemStack.EMPTY);
+                cir.cancel();
+            }
         }
-        return ret;
     }
 }

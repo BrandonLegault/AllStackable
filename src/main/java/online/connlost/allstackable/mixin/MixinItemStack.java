@@ -27,20 +27,20 @@ public class MixinItemStack {
                 }
             }
         }
-
     }
 
-    @Redirect(method = "damage(ILnet/minecraft/util/math/random/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"))
-    private void splitStackedTools(ItemStack stack, int damage, int amount, Random random, @Nullable ServerPlayerEntity player){
+    @Redirect(method = "damage(ILnet/minecraft/server/world/ServerWorld;Lnet/minecraft/server/network/ServerPlayerEntity;Ljava/util/function/Consumer;)V",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"))
+    private void splitStackedTools(ItemStack instance, int damage) {
         ItemStack rest = null;
-        if (stack.getCount()>1 && ItemsHelper.isModified(stack) && player!=null){
-            rest = stack.copy();
+        if (instance.getCount() > 1 && ItemsHelper.isModified(instance) && instance.getHolder() != null && instance.getHolder().isPlayer()) {
+            rest = instance.copy();
             rest.decrement(1);
-            stack.setCount(1);
+            instance.setCount(1);
         }
-        stack.setDamage(damage);
-        if (rest != null){
-            ItemsHelper.insertNewItem(player,rest);
+        instance.setDamage(damage);
+        if (rest != null) {
+            ItemsHelper.insertNewItem((ServerPlayerEntity) instance.getHolder(), rest);
         }
     }
 }

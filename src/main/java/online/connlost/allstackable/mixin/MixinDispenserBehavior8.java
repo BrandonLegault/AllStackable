@@ -3,7 +3,6 @@ package online.connlost.allstackable.mixin;
 import online.connlost.allstackable.util.IDispenserBlockEntity;
 import online.connlost.allstackable.util.ItemsHelper;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
-import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPointer;
@@ -14,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$8")
+@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$15")
 public class MixinDispenserBehavior8 {
     @Shadow
     @Final
@@ -39,9 +38,9 @@ public class MixinDispenserBehavior8 {
             ItemStack newStack = stack.copy();
             newStack.decrement(1);
 //            if (((DispenserBlockEntity) pointer.getBlockEntity()).addToFirstFreeSlot(Items.BUCKET.getDefaultStack()) < 0) {
-                if (!((IDispenserBlockEntity) pointer.blockEntity()).tryInsertAndStackItem(Items.BUCKET.getDefaultStack())) {
-                    this.fallbackBehavior.dispense(pointer, Items.BUCKET.getDefaultStack());
-                }
+            if (!((IDispenserBlockEntity) pointer.blockEntity()).tryInsertAndStackItem(Items.BUCKET.getDefaultStack())) {
+                this.fallbackBehavior.dispense(pointer, Items.BUCKET.getDefaultStack());
+            }
 //            }
             cir.setReturnValue(newStack);
         }

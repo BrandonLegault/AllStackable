@@ -1,5 +1,7 @@
 package online.connlost.allstackable.util;
 
+import net.minecraft.component.ComponentMap;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -9,10 +11,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Set;
+
+import java.util.*;
 
 import static online.connlost.allstackable.AllStackableInit.LOGGER;
 
@@ -45,7 +45,7 @@ public class ItemsHelper {
     public void setCountByConfig(Set<Map.Entry<String, Integer>> configSet, boolean serverSide) {
         resetAll(serverSide);
         for (Map.Entry<String, Integer> entry : configSet) {
-            Item item = Registries.ITEM.get(new Identifier(entry.getKey()));
+            Item item = Registries.ITEM.get(Identifier.of(entry.getKey()));
             int size = Integer.min(entry.getValue(), 64);
             if (serverSide)
                 LOGGER.info("[All Stackable] Set " + entry.getKey() + " to " + size);
@@ -153,12 +153,12 @@ public class ItemsHelper {
     public static final int TAG_LONGARRAY = 12;
 
     public static boolean shulkerBoxHasItems(ItemStack stack) {
-        NbtCompound tag = stack.getNbt();
+        ComponentMap tag = stack.getComponents();
 
-        if (tag == null || !tag.contains("BlockEntityTag", TAG_COMPOUND))
+        if (tag == null || !tag.contains(DataComponentTypes.BLOCK_ENTITY_DATA))
             return false;
 
-        NbtCompound bet = tag.getCompound("BlockEntityTag");
+        NbtCompound bet = Objects.requireNonNull(tag.get(DataComponentTypes.BLOCK_ENTITY_DATA)).copyNbt();
         return bet.contains("Items", TAG_LIST) && !bet.getList("Items", TAG_COMPOUND).isEmpty();
     }
 
