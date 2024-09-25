@@ -1,34 +1,28 @@
 {
-  "required": true,
-  "minVersion": "0.7",
-  "package": "online.connlost.allstackable.mixin",
-  "compatibilityLevel": "JAVA_17",
-  "mixins": [
-    "MixinItem",
-    "MixinPlayerManager",
-    "MixinMushroomStewItem",
-    "MixinSuspiciousStewItem",
-    "MixinBucketItem",
-    "MixinMilkBucketItem",
-    "MixinItemStack",
-    "MixinPowderSnowBucketItem",
-    "MixinCauldronBlock",
-    "MixinAxolotlEntity",
-    "MixinAbstractFurnaceBlockEntity",
-    "MixinAnvilScreenHandler",
-    "MixinDispenserBehavior8",
-    "MixinDispenserBehavior9",
-    "MixinHorseScreenHandler",
-    "MixinServerPlayNetworkHandler",
-    "MixinJukeboxBlockEntity",
-    "AccessorFurnaceInventory",
-    "MixinPotionItem",
-    "MixinDispenserBlockEntity"
-  ],
-  "client": [
-    "MixinMinecraftClientGame"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+	"required": true,
+	"package": "online.connlost.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"MixinItem",
+		"MixinPlayerManager",
+		"MixinSuspiciousStewItem",
+		"MixinBucketItem",
+		"MixinItemStack",
+		"MixinPowderSnowBucketItem",
+		"MixinCauldronBlock",
+		"MixinAxolotlEntity",
+		"MixinAbstractFurnaceBlockEntity",
+		"MixinAnvilScreenHandler",
+		"MixinDispenserBehavior8",
+		"MixinDispenserBehavior9",
+		"MixinHorseScreenHandler",
+		"MixinServerPlayNetworkHandler",
+		"MixinJukeboxBlockEntity",
+		"AccessorFurnaceInventory",
+		"MixinPotionItem",
+		"MixinDispenserBlockEntity"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
 }

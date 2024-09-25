@@ -1,0 +1,37 @@
+package online.connlost.util;
+
+import io.netty.buffer.Unpooled;
+import online.connlost.AllStackable;
+import online.connlost.server.Server;
+import online.connlost.server.config.ConfigManager;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
+
+import java.util.List;
+
+import static online.connlost.AllStackable.LOGGER;
+
+public class NetworkHelper {
+
+    public static void sentConfigToAll(){
+        if (Server.minecraft_server != null){
+            List<ServerPlayerEntity> players = Server.minecraft_server.getPlayerManager().getPlayerList();
+            for (ServerPlayerEntity player:players){
+                sentConfigToPlayer(player);
+            }
+        } else {
+            LOGGER.warn("[All Stackable] Server hasn't been loaded.");
+        }
+    }
+
+    public static void sentConfigToPlayer(ServerPlayerEntity player){
+        PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
+        passedData.writeByteArray(ConfigManager.getConfigManager().getSerializedConfig());
+        ServerPlayNetworking.send(
+                player,
+                AllStackable.SHARE_CONFIG_PACKET_ID,
+                passedData
+        );
+    }
+}

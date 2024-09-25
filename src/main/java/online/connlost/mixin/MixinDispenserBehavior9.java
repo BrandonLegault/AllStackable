@@ -1,0 +1,27 @@
+package online.connlost.mixin;
+
+import net.minecraft.block.entity.DispenserBlockEntity;
+import net.minecraft.item.ItemStack;
+import online.connlost.util.IDispenserBlockEntity;
+import online.connlost.util.ItemsHelper;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
+
+@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$9")
+public class MixinDispenserBehavior9 {
+
+    @Redirect(
+            method = "dispenseSilently",
+            at = @At(
+                    target = "Lnet/minecraft/block/entity/DispenserBlockEntity;addToFirstFreeSlot(Lnet/minecraft/item/ItemStack;)I",
+                    value = "INVOKE"
+            ))
+    public int tryStack(DispenserBlockEntity instance, ItemStack stack) {
+        int ret = instance.addToFirstFreeSlot(stack);
+        if(ItemsHelper.isModified(stack) && ret < 0) {
+            ret = ((IDispenserBlockEntity) instance).tryInsertAndStackItem(stack) ? 1 : -1;
+        }
+        return ret;
+    }
+}
