@@ -13,12 +13,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$20")
+@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$15")
 public class MixinDispenserBehavior20 {
 
     @Shadow
     @Final
-    private ItemDispenserBehavior fallback;
+    private ItemDispenserBehavior fallbackBehavior;
 
     @Inject(
             method = "dispenseSilently",
@@ -28,9 +28,9 @@ public class MixinDispenserBehavior20 {
     private void decreaseOne(BlockPointer pointer, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
         // dispense empty bottle if dispenser is full
 //        if (((DispenserBlockEntity) pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(Items.GLASS_BOTTLE)) < 0) {
-            if (!((IDispenserBlockEntity)pointer.blockEntity()).tryInsertAndStackItem(new ItemStack(Items.GLASS_BOTTLE))) {
-                this.fallback.dispense(pointer, new ItemStack(Items.GLASS_BOTTLE));
-            }
+        if (!((IDispenserBlockEntity)pointer.blockEntity()).tryInsertAndStackItem(new ItemStack(Items.GLASS_BOTTLE))) {
+            this.fallbackBehavior.dispense(pointer, new ItemStack(Items.GLASS_BOTTLE));
+        }
 //        }
         stack.decrement(1);
         cir.setReturnValue(stack);

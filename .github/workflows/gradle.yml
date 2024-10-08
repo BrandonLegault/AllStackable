@@ -33,6 +33,5 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: AllStackable_${{ matrix.java }}
+        name: AllStackable_Java${{ matrix.java }}
         path: build/libs/AllStackable-*.*-*.*[^sourcedv].jar
-      

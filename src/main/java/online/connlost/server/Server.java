@@ -20,7 +20,7 @@ public class Server {
     }
 
     public static void onPlayerJoin(ServerPlayerEntity player){
-        NetworkHelper.sentConfigToPlayer(player);
+        NetworkHelper.sentConfigToPlayer(player, ConfigManager.getConfigManager().getSerializedConfig());
     }
 
 }
