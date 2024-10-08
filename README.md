@@ -31,7 +31,7 @@ Video: https://streamable.com/7htqbn ( Issues in the video have already been fix
 
 ## Download
 
-**[Modrinth](https://modrinth.com/mods?s=updated)**
+**[Modrinth](https://modrinth.com/mod/all-stackable)**
 
 [CurseForge](https://www.curseforge.com/minecraft/mc-mods/all-stackable)
 
