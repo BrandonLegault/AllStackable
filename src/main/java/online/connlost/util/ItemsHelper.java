@@ -7,7 +7,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -17,6 +16,7 @@ import java.util.*;
 import static online.connlost.AllStackable.LOGGER;
 
 public class ItemsHelper {
+    public static final int ItemMaxCount = 99;
     private static ItemsHelper itemsHelper;
 
     private ItemsHelper() {
@@ -46,7 +46,7 @@ public class ItemsHelper {
         resetAll(serverSide);
         for (Map.Entry<String, Integer> entry : configSet) {
             Item item = Registries.ITEM.get(Identifier.of(entry.getKey()));
-            int size = Integer.min(entry.getValue(), 64);
+            int size = Integer.min(entry.getValue(), ItemsHelper.ItemMaxCount);
             if (serverSide)
                 LOGGER.info("[All Stackable] Set " + entry.getKey() + " to " + size);
             else
