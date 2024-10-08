@@ -1,4 +1,4 @@
-package online.connlost.allstackable.util;
+package online.connlost.util;
 
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;

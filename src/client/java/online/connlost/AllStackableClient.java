@@ -1,4 +1,4 @@
-package online.connlost.allstackable.client;
+package online.connlost;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -7,20 +7,16 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 
-
-import online.connlost.allstackable.util.ByteArrayPayload;
+import online.connlost.util.ByteArrayPayload;
 import org.apache.commons.lang3.SerializationUtils;
 
 
-public class AllStackableClientInit implements ClientModInitializer {
-
+public class AllStackableClient implements ClientModInitializer {
     @Override
     @Environment(EnvType.CLIENT)
     public void onInitializeClient() {
-
         ClientPlayConnectionEvents.INIT.register((handler, client) -> {
             ClientPlayNetworking.registerReceiver(
                     ByteArrayPayload.ID,

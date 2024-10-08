@@ -1,6 +1,5 @@
 package online.connlost.mixin;
 
-import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.item.ItemStack;
 import online.connlost.util.IDispenserBlockEntity;
 import online.connlost.util.ItemsHelper;

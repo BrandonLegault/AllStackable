@@ -1,9 +1,9 @@
 {
 	"required": true,
-	"package": "online.connlost.mixin.client",
+	"package": "online.connlost.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"MixinMinecraftClient"
+      "MixinMinecraftClient"
 	],
 	"injectors": {
 		"defaultRequire": 1

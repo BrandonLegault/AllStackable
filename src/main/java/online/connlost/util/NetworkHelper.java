@@ -1,6 +1,5 @@
 package online.connlost.util;
 
-import online.connlost.AllStackable;
 import online.connlost.server.Server;
 import online.connlost.server.config.ConfigManager;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;

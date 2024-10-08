@@ -1,4 +1,4 @@
-package online.connlost.mixin.client;
+package online.connlost.mixin;
 
 import online.connlost.ConfigSync;
 import net.minecraft.client.MinecraftClient;
