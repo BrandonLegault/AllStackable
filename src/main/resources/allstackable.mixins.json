@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "online.connlost.mixin",
+	"package": "online.connlost.allstackable.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"MixinItem",

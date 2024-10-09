@@ -16,10 +16,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"online.connlost.AllStackable"
+			"online.connlost.allstackable.AllStackable"
 		],
 		"client": [
-          "online.connlost.AllStackableClient"
+			"online.connlost.allstackable.AllStackableClient"
 		]
 	},
 	"mixins": [
