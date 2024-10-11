@@ -3,7 +3,6 @@ package online.connlost.allstackable.mixin;
 import net.minecraft.server.filter.FilteredMessage;
 import online.connlost.allstackable.util.ItemsHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.filter.TextStream;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;

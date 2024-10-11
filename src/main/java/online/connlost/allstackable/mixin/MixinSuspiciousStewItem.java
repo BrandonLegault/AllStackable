@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(SuspiciousStewItem.class)
 public class MixinSuspiciousStewItem {
 
-    @Inject(method = "finishUsing", at = @At(value = "NEW", target = "net/minecraft/item/ItemStack"), cancellable = true)
+    @Inject(method = "finishUsing", at = @At(value = "HEAD"), cancellable = true)
     private void stackableStew(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
         // >= 1 because it is decreased by 1 before our code execution
         if (ItemsHelper.isModified(stack) && stack.getCount() >= 1) {
@@ -26,3 +26,4 @@ public class MixinSuspiciousStewItem {
         }
     }
 }
+

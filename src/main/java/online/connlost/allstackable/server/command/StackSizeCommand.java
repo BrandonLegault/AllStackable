@@ -195,7 +195,7 @@ public class StackSizeCommand {
                     )
                     .then(literal("set")
                             .then(argument("item", ItemStackArgumentType.itemStack(registryAccess))
-                                    .then(argument("count", IntegerArgumentType.integer(1, 64))
+                                    .then(argument("count", IntegerArgumentType.integer(1, ItemsHelper.ItemMaxCount))
                                             .executes(ctx -> setItem(
                                                     ctx.getSource(),
                                                     ItemStackArgumentType.getItemStackArgument(ctx, "item").getItem(),
@@ -203,7 +203,7 @@ public class StackSizeCommand {
                             )
                             .then(literal("hand")
                                     .then(argument("targets", EntityArgumentType.player())
-                                            .then(argument("count", IntegerArgumentType.integer(1, 64))
+                                            .then(argument("count", IntegerArgumentType.integer(1, ItemsHelper.ItemMaxCount))
                                                     .executes(ctx -> setItemOnHand(
                                                             ctx.getSource(),
                                                             EntityArgumentType.getPlayer(ctx, "targets"),
@@ -211,8 +211,8 @@ public class StackSizeCommand {
                                     )
                             )
                             .then(literal("vanilla")
-                                    .then(argument("vanillaSize", IntegerArgumentType.integer(1, 64))
-                                            .then(argument("customSize", IntegerArgumentType.integer(1, 64))
+                                    .then(argument("vanillaSize", IntegerArgumentType.integer(1, ItemsHelper.ItemMaxCount))
+                                            .then(argument("customSize", IntegerArgumentType.integer(1, ItemsHelper.ItemMaxCount))
                                                     .executes(ctx -> setMatched(
                                                             ctx.getSource(),
                                                             "vanilla",
@@ -223,8 +223,8 @@ public class StackSizeCommand {
                                     )
                             )
                             .then(literal("modified")
-                                    .then(argument("previousSize", IntegerArgumentType.integer(1, 64))
-                                            .then(argument("newSize", IntegerArgumentType.integer(1, 64))
+                                    .then(argument("previousSize", IntegerArgumentType.integer(1, ItemsHelper.ItemMaxCount))
+                                            .then(argument("newSize", IntegerArgumentType.integer(1, ItemsHelper.ItemMaxCount))
                                                     .executes(ctx -> setMatched(
                                                             ctx.getSource(),
                                                             "modified",
@@ -235,8 +235,8 @@ public class StackSizeCommand {
                                     )
                             )
                             .then(literal("all")
-                                    .then(argument("previousSize", IntegerArgumentType.integer(1, 64))
-                                            .then(argument("newSize", IntegerArgumentType.integer(1, 64))
+                                    .then(argument("previousSize", IntegerArgumentType.integer(1, ItemsHelper.ItemMaxCount))
+                                            .then(argument("newSize", IntegerArgumentType.integer(1, ItemsHelper.ItemMaxCount))
                                                     .executes(ctx -> setMatched(
                                                             ctx.getSource(),
                                                             "all",

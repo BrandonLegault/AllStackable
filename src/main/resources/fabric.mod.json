@@ -1,40 +1,41 @@
 {
-  "schemaVersion": 1,
-  "id": "allstackable",
-  "version": "${version}",
-
-  "name": "AllStackable",
-  "description": "A highly customizable Fabric Mod that makes items stackable and allows you to change the stack size of them.",
-  "authors": [
-    "Conn_Lost"
-  ],
-  "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/all-stackable/",
-    "sources": "https://github.com/KrisCris/AllStackable"
-  },
-
-  "license": "GPL-3.0",
-  "icon": "assets/allstackable/icon.png",
-
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "online.connlost.allstackable.AllStackableInit"
-    ],
-    "client": [
-      "online.connlost.allstackable.client.AllStackableClientInit"
-    ]
-  },
-  "mixins": [
-    "allstackable.mixins.json"
-  ],
-
-  "depends": {
-    "fabricloader": ">=0.14",
-    "fabric": "*",
-    "minecraft": ">=1.20"
-  },
-  "suggests": {
-    "flamingo": "*"
-  }
+	"schemaVersion": 1,
+	"id": "allstackable",
+	"version": "${version}",
+	"name": "AllStackable",
+	"description": "A highly customizable Fabric Mod that makes items stackable and allows you to change the stack size of them.",
+	"authors": [
+		"connlost"
+	],
+	"contact": {
+		"homepage": "https://www.curseforge.com/minecraft/mc-mods/all-stackable/",
+		"sources": "https://github.com/KrisCris/AllStackable"
+	},
+	"license": "GPL-3.0",
+	"icon": "assets/allstackable/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"online.connlost.allstackable.AllStackable"
+		],
+		"client": [
+			"online.connlost.allstackable.AllStackableClient"
+		]
+	},
+	"mixins": [
+		"allstackable.mixins.json",
+		{
+			"config": "allstackable.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
 }
